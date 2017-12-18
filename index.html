@@ -381,7 +381,7 @@ $ make install
 </li>
 </ul>
 <p>虚拟机的最大空间为20G，qcow2格式，空间是动态增长。用于跑支持lightnvm的内核</p>
-<h4 id="2-在该磁盘文件中安装一个Linux系统。"><a href="#2-在该磁盘文件中安装一个Linux系统。" class="headerlink" title="2. 在该磁盘文件中安装一个Linux系统。"></a>2. 在该磁盘文件中安装一个Linux系统。</h4><p><code>$ qemu-system-x86_64 -m 2G -enable-kvm ubuntu.raw -cdrom ~/ubuntu.iso</code><br>其中 -m 表示内存为2G, -cdrom会找到用于安装的镜像文件，(我这里是ubuntu16.04)。安装之后，就可以通过下面的命令启动虚拟机了:<br><code>$ qemu-system-x86_64 -m 4G -enable-kvm ubuntu.raw</code></p>
+<h4 id="2-在该磁盘文件中安装一个Linux系统。"><a href="#2-在该磁盘文件中安装一个Linux系统。" class="headerlink" title="2. 在该磁盘文件中安装一个Linux系统。"></a>2. 在该磁盘文件中安装一个Linux系统。</h4><p><code>$ qemu-system-x86_64 -m 2G -enable-kvm ubuntu.qcow2 -cdrom ~/ubuntu.iso</code><br>其中 -m 表示内存为2G, -cdrom会找到用于安装的镜像文件，(我这里是ubuntu16.04)。安装之后，就可以通过下面的命令启动虚拟机了:<br><code>$ qemu-system-x86_64 -m 4G -enable-kvm ubuntu.qcow2</code></p>
 <h3 id="在linux主机中编译支持Lightnvm的内核"><a href="#在linux主机中编译支持Lightnvm的内核" class="headerlink" title="在linux主机中编译支持Lightnvm的内核"></a>在linux主机中编译支持Lightnvm的内核</h3><pre><code>$ git clone https://github.com/OpenChannelSSD/linux.git
 $ cd linux
 $ git checkout for-next (other branch is ok, make sure if it work)

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Aran-lq&#39;s website">
 <meta property="og:description" content="参考官网和一些博客，自己梳理了一下整个流程。一定要注意虚拟机跑qemu一般是不支持kvm的，非常非常慢… 在nvme-qemu上配置LightnvmLightnvm的原作者在文档中给出了两种实现方式，第一种是使用真实设备，比如CNEX公司的的Open-channel SSD，价格昂贵，并且由于国内没有代理商的缘故，现在还很难买到。第二种方式就是本文将要介绍的，使用QEMU的方式，向主机侧提供一个模">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-18T09:19:58.036Z">
+<meta property="og:updated_time" content="2017-12-18T09:31:33.560Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LightNVM 环境搭建，基于QEMU模拟的NVMe设备">
 <meta name="twitter:description" content="参考官网和一些博客，自己梳理了一下整个流程。一定要注意虚拟机跑qemu一般是不支持kvm的，非常非常慢… 在nvme-qemu上配置LightnvmLightnvm的原作者在文档中给出了两种实现方式，第一种是使用真实设备，比如CNEX公司的的Open-channel SSD，价格昂贵，并且由于国内没有代理商的缘故，现在还很难买到。第二种方式就是本文将要介绍的，使用QEMU的方式，向主机侧提供一个模">
@@ -378,7 +378,7 @@ $ make install
 </li>
 </ul>
 <p>虚拟机的最大空间为20G，qcow2格式，空间是动态增长。用于跑支持lightnvm的内核</p>
-<h4 id="2-在该磁盘文件中安装一个Linux系统。"><a href="#2-在该磁盘文件中安装一个Linux系统。" class="headerlink" title="2. 在该磁盘文件中安装一个Linux系统。"></a>2. 在该磁盘文件中安装一个Linux系统。</h4><p><code>$ qemu-system-x86_64 -m 2G -enable-kvm ubuntu.raw -cdrom ~/ubuntu.iso</code><br>其中 -m 表示内存为2G, -cdrom会找到用于安装的镜像文件，(我这里是ubuntu16.04)。安装之后，就可以通过下面的命令启动虚拟机了:<br><code>$ qemu-system-x86_64 -m 4G -enable-kvm ubuntu.raw</code></p>
+<h4 id="2-在该磁盘文件中安装一个Linux系统。"><a href="#2-在该磁盘文件中安装一个Linux系统。" class="headerlink" title="2. 在该磁盘文件中安装一个Linux系统。"></a>2. 在该磁盘文件中安装一个Linux系统。</h4><p><code>$ qemu-system-x86_64 -m 2G -enable-kvm ubuntu.qcow2 -cdrom ~/ubuntu.iso</code><br>其中 -m 表示内存为2G, -cdrom会找到用于安装的镜像文件，(我这里是ubuntu16.04)。安装之后，就可以通过下面的命令启动虚拟机了:<br><code>$ qemu-system-x86_64 -m 4G -enable-kvm ubuntu.qcow2</code></p>
 <h3 id="在linux主机中编译支持Lightnvm的内核"><a href="#在linux主机中编译支持Lightnvm的内核" class="headerlink" title="在linux主机中编译支持Lightnvm的内核"></a>在linux主机中编译支持Lightnvm的内核</h3><pre><code>$ git clone https://github.com/OpenChannelSSD/linux.git
 $ cd linux
 $ git checkout for-next (other branch is ok, make sure if it work)
