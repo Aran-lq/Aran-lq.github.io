@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Open channel SSD,Linux,LightNVM,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Aaron-lq's website" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="参考官网和一些博客，自己梳理了一下整个流程。一定要注意虚拟机跑qemu一般是不支持kvm的，非常非常慢… 在nvme-qemu上配置LightnvmLightnvm的原作者在文档中给出了两种实现方式，第一种是使用真实设备，比如CNEX公司的的Open-channel SSD，价格昂贵，并且由于国内没有代理商的缘故，现在还很难买到。第二种方式就是本文将要介绍的，使用QEMU的方式，向主机侧提供一个模">
+<meta name="keywords" content="Open channel SSD,Linux,LightNVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu搭建使用LightNVM开发Open Channel SSD的QEMU虚拟机">
+<meta property="og:url" content="http://yoursite.com/2017-11-06-nvme-lightnvm/2017/11/06/index.html">
+<meta property="og:site_name" content="Aaron-lq&#39;s website">
+<meta property="og:description" content="参考官网和一些博客，自己梳理了一下整个流程。一定要注意虚拟机跑qemu一般是不支持kvm的，非常非常慢… 在nvme-qemu上配置LightnvmLightnvm的原作者在文档中给出了两种实现方式，第一种是使用真实设备，比如CNEX公司的的Open-channel SSD，价格昂贵，并且由于国内没有代理商的缘故，现在还很难买到。第二种方式就是本文将要介绍的，使用QEMU的方式，向主机侧提供一个模">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-18T10:03:26.025Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ubuntu搭建使用LightNVM开发Open Channel SSD的QEMU虚拟机">
+<meta name="twitter:description" content="参考官网和一些博客，自己梳理了一下整个流程。一定要注意虚拟机跑qemu一般是不支持kvm的，非常非常慢… 在nvme-qemu上配置LightnvmLightnvm的原作者在文档中给出了两种实现方式，第一种是使用真实设备，比如CNEX公司的的Open-channel SSD，价格昂贵，并且由于国内没有代理商的缘故，现在还很难买到。第二种方式就是本文将要介绍的，使用QEMU的方式，向主机侧提供一个模">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017-11-06-nvme-lightnvm/2017/11/06/">
+
+
+
+
+
+  <title>Ubuntu搭建使用LightNVM开发Open Channel SSD的QEMU虚拟机 | Aaron-lq's website</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aaron-lq's website</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017-11-06-nvme-lightnvm/2017/11/06/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron-lq">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aaron-lq's website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ubuntu搭建使用LightNVM开发Open Channel SSD的QEMU虚拟机</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T23:43:08-05:00">
+                2017-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/study/" itemprop="url" rel="index">
+                    <span itemprop="name">study</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>参考官网和一些博客，自己梳理了一下整个流程。一定要注意虚拟机跑qemu一般是不支持kvm的，非常非常慢…</p>
+<h2 id="在nvme-qemu上配置Lightnvm"><a href="#在nvme-qemu上配置Lightnvm" class="headerlink" title="在nvme-qemu上配置Lightnvm"></a>在nvme-qemu上配置Lightnvm</h2><p>Lightnvm的原作者在文档中给出了两种实现方式，第一种是使用真实设备，比如CNEX公司的的Open-channel SSD，价格昂贵，并且由于国内没有代理商的缘故，现在还很难买到。第二种方式就是本文将要介绍的，使用<a href="http://www.qemu.org" target="_blank" rel="noopener">QEMU</a>的方式，向主机侧提供一个模拟的支持open channel功能的nvme设备。实际上qemu中仅仅是模拟了NVMe specification 1.2.1的HCI的功能逻辑，并且作者增加了支持lightnvm的扩展，让主机端的驱动程序以为下面是一个真实的设备，这样一种方式就提供了一个快速，便捷地体验Lightnvm的方式 : )<br>下面是我的配置过程。</p>
+<h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><ul>
+<li>host: linux 4.10, ubuntu17.04(amd64) </li>
+<li>guest: ubuntu 16.04 on nvme-qemu.</li>
+</ul>
+<h3 id="在主机端安装nvme-qemu"><a href="#在主机端安装nvme-qemu" class="headerlink" title="在主机端安装nvme-qemu"></a>在主机端安装nvme-qemu</h3><ul>
+<li>克隆增加lightnvm支持的分支，nvme-qemu(<a href="https://github.com/OpenChannelSSD/qemu-nvme" target="_blank" rel="noopener">https://github.com/OpenChannelSSD/qemu-nvme</a>)<br><code>$ git clone https://github.com/OpenChannelSSD/qemu-nvme.git</code></li>
+<li><p>编译QEMU源码，并且安装，需要注意的是 ，qemu需要安装在Linux主机下，如果是虚拟机的话一般不支持kvm，这样QEMU跑起来会非常慢。</p>
+<pre><code>$ ./configure --python=/usr/bin/python2 --enable-kvm --target-list=x86_64-softmmu --enable-linux-aio --prefix=(安装的目录) 
+$ make -j4
+$ make install
+</code></pre><h3 id="创建一个QEMU虚拟机"><a href="#创建一个QEMU虚拟机" class="headerlink" title="创建一个QEMU虚拟机"></a>创建一个QEMU虚拟机</h3><h4 id="1-创建一个空白的磁盘文件"><a href="#1-创建一个空白的磁盘文件" class="headerlink" title="1. 创建一个空白的磁盘文件"></a>1. 创建一个空白的磁盘文件</h4><p><code>$ qemu-img create -f qcow2 ubuntu.qcow2 20G</code></p>
+</li>
+</ul>
+<p>虚拟机的最大空间为20G，qcow2格式，空间是动态增长。用于跑支持lightnvm的内核</p>
+<h4 id="2-在该磁盘文件中安装一个Linux系统。"><a href="#2-在该磁盘文件中安装一个Linux系统。" class="headerlink" title="2. 在该磁盘文件中安装一个Linux系统。"></a>2. 在该磁盘文件中安装一个Linux系统。</h4><p><code>$ qemu-system-x86_64 -m 2G -enable-kvm ubuntu.qcow2 -cdrom ~/ubuntu.iso</code><br>其中 -m 表示内存为2G, -cdrom会找到用于安装的镜像文件，(我这里是ubuntu16.04)。安装之后，就可以通过下面的命令启动虚拟机了:<br><code>$ qemu-system-x86_64 -m 4G -enable-kvm ubuntu.qcow2</code></p>
+<h3 id="在linux主机中编译支持Lightnvm的内核"><a href="#在linux主机中编译支持Lightnvm的内核" class="headerlink" title="在linux主机中编译支持Lightnvm的内核"></a>在linux主机中编译支持Lightnvm的内核</h3><pre><code>$ git clone https://github.com/OpenChannelSSD/linux.git
+$ cd linux
+$ git checkout for-next (other branch is ok, make sure if it work)
+$ make menuconfig  
+</code></pre><p>确保配置项中包含下面的内容：  </p>
+<pre><code>CONFIG_NVM=y
+# Expose the /sys/module/lnvm/parameters/configure_debug interface
+CONFIG_NVM_DEBUG=y
+# Target support (required to expose the open-channel SSD as a block device)
+CONFIG_NVM_PBLK=y    
+# For NVMe support
+CONFIG_BLK_DEV_NVME=y
+</code></pre><p>继续编译：  </p>
+<pre><code>$ make -j4 &gt; /dev/null 
+</code></pre><p>成功后会在 <code>/arch/x86/boot/</code>目录下找到内核压缩文件bzImage，大小7M左右。为什么要使用这个文件，是因为QEMU提供了一种直接加载内核镜像文件的功能，这样方便于快速的测试不同内核，也让虚拟机更加轻量。前面自己是直接在虚拟机里面编译内核，安装。可一旦要在其他机器上面配置环境进行实验，得重新再编译内核，拷贝的话体量又太大。现在采用bzImage的方式后，整个过程就轻量了很多。配置新的环境，只需要编译和安装QEMU，再装一个最简单的Linux，将bzImage文件拷贝过去可以了。</p>
+<h3 id="创建一个模拟NVMe设备的空白文件"><a href="#创建一个模拟NVMe设备的空白文件" class="headerlink" title="创建一个模拟NVMe设备的空白文件"></a>创建一个模拟NVMe设备的空白文件</h3><p>在主机端使用下面命令，创建一个空白的设备文件：<br><code>$ dd if=/dev/zero of=blknvme bs=1M count=1024</code></p>
+<h3 id="启动QEMU虚拟机"><a href="#启动QEMU虚拟机" class="headerlink" title="启动QEMU虚拟机"></a>启动QEMU虚拟机</h3><p>通过QEMU启动一个支持Lightnvm的虚拟机，并且挂载了一个模拟的NVMe设备。下面是我的启动命令脚本，需要确保相关文件都在同一个目录下面。</p>
+<pre><code>#!/bin/bash
+# Boot vm
+
+sudo qemu-system-x86_64 -m 4G -smp 1 --enable-kvm \
+-hda ubuntu.qcow2 --append &quot;root=/dev/sda1&quot; \
+-kernel &quot;bzImage&quot; \
+-drive file=blknvme,if=none,id=mynvme \
+-redir tcp:37812::22 \ (用于主机和虚拟机的ssh通信，端口号为37812。此项也可以不填)
+-device nvme,drive=mynvme,serial=deadbeef,namespaces=1,lver=1,lmetasize=16,ll2pmode=0,nlbaf=5,lba_index=3,mdts=10,lnum_lun=16,lnum_pln=2,lsec_size=4096,lsecs_per_pg=4,lpgs_per_blk=512,lbbtable=bbtable.qemu,lmetadata=meta.qemu,ldebug=1 \
+</code></pre><h3 id="在虚拟机中安装nvme-cli来使用Lightnvm"><a href="#在虚拟机中安装nvme-cli来使用Lightnvm" class="headerlink" title="在虚拟机中安装nvme-cli来使用Lightnvm"></a>在虚拟机中安装nvme-cli来使用Lightnvm</h3><p>目前，我们已经有了：  </p>
+<ul>
+<li>一个支持<em>Lightnvm</em>和<em>NVMe设备</em>的内核  </li>
+<li>一个NVMe的设备（由QEMU模拟）  </li>
+</ul>
+<p>因此，我们还需要一个能在用户空间管理和控制这个设备的工具。可以使用<strong>nvme-cli</strong>。确保下载的是最新的版本（1.3.44）,支持<em>nvme lnvm</em>命令。</p>
+<pre><code>$ git clone https://github.com/linux-nvme/nvme-cli.git
+$ cd nvme-cli
+$ make -j2
+$ make install
+</code></pre><p>到目前为止，已经完成了整个环境的搭建。现在就可以使用下面的命令来检测NVMe设备并且在上面创建一个target。下面是我的输出结果。</p>
+<pre><code>$ nvme lnvm list
+Number of devices: 1
+Device          Block manager    Version
+nvme0n1         gennvm          (1,0,0)
+
+$ nvme lnvm info
+LightNVM (1,0,0). 1 target type(s) registered.
+Type    Version
+pblk    (1,0,0)
+
+$ lsblk (list available blk devick)
+NAME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sr0      11:0    1 1024M  0 rom  
+fd0       2:0    1    4K  0 disk 
+sda       8:0    0   50G  0 disk 
+├─sda2    8:2    0    1K  0 part 
+├─sda5    8:5    0    2G  0 part [SWAP]
+└─sda1    8:1    0   48G  0 part /
+nvme0n1 259:0    0 1022M  0 disk (our nvme device)
+
+$ nvme lnvm create -d nvme0n1 -n mydevice -t pblk -b 0 -e 3(create a target on nvme device,name mydevice,lun0-lun4)
+
+$ lsblk 
+NAME     MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sr0       11:0    1 1024M  0 rom  
+fd0        2:0    1    4K  0 disk 
+mydevice 259:1    0  144M  0 disk (**target created by us**)
+sda        8:0    0   50G  0 disk 
+├─sda2     8:2    0    1K  0 part 
+├─sda5     8:5    0    2G  0 part [SWAP]
+└─sda1     8:1    0   48G  0 part /
+nvme0n1  259:0    0 1022M  0 disk 
+</code></pre><h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="http://openchannelssd.readthedocs.io/en/latest/gettingstarted/" target="_blank" rel="noopener">官方资料</a></p>
+<p><a href="http://www.jianshu.com/p/8e11fa93411a" target="_blank" rel="noopener">http://www.jianshu.com/p/8e11fa93411a</a></p>
+<p><a href="https://hyunyoung2.github.io/2016/10/04/LightNVM_With_OpenChannelSSD_On_QEMU/" target="_blank" rel="noopener">https://hyunyoung2.github.io/2016/10/04/LightNVM_With_OpenChannelSSD_On_QEMU/</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Open-channel-SSD/" rel="tag"># Open channel SSD</a>
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/LightNVM/" rel="tag"># LightNVM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017-10-14-test/2017/10/14/" rel="next" title="悬崖上的人鱼姬影评">
+                <i class="fa fa-chevron-left"></i> 悬崖上的人鱼姬影评
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/VR-concept/2017/12/26/" rel="prev" title="VR介绍，学习笔记">
+                VR介绍，学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpeg" alt="Aaron-lq">
+            
+              <p class="site-author-name" itemprop="name">Aaron-lq</p>
+              <p class="site-description motion-element" itemprop="description">Though life's a struggle, enjoy it and do your best...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/aran-lq" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:liqi9281@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/aran_lq" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在nvme-qemu上配置Lightnvm"><span class="nav-number">1.</span> <span class="nav-text">在nvme-qemu上配置Lightnvm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置环境"><span class="nav-number">1.1.</span> <span class="nav-text">配置环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在主机端安装nvme-qemu"><span class="nav-number">1.2.</span> <span class="nav-text">在主机端安装nvme-qemu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个QEMU虚拟机"><span class="nav-number">1.3.</span> <span class="nav-text">创建一个QEMU虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-创建一个空白的磁盘文件"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. 创建一个空白的磁盘文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-在该磁盘文件中安装一个Linux系统。"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 在该磁盘文件中安装一个Linux系统。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在linux主机中编译支持Lightnvm的内核"><span class="nav-number">1.4.</span> <span class="nav-text">在linux主机中编译支持Lightnvm的内核</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个模拟NVMe设备的空白文件"><span class="nav-number">1.5.</span> <span class="nav-text">创建一个模拟NVMe设备的空白文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动QEMU虚拟机"><span class="nav-number">1.6.</span> <span class="nav-text">启动QEMU虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在虚拟机中安装nvme-cli来使用Lightnvm"><span class="nav-number">1.7.</span> <span class="nav-text">在虚拟机中安装nvme-cli来使用Lightnvm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文档"><span class="nav-number">1.8.</span> <span class="nav-text">参考文档</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron-lq</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

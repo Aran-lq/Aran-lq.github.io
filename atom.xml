@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-04-24T03:05:10.909Z</updated>
+  <updated>2020-02-27T22:45:27.376Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,24 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>hi test</title>
-    <link href="http://yoursite.com/2019/04/24/hi-test/"/>
-    <id>http://yoursite.com/2019/04/24/hi-test/</id>
-    <published>2019-04-24T15:05:10.000Z</published>
-    <updated>2019-04-24T03:05:10.909Z</updated>
+    <title>滚回来写博客了</title>
+    <link href="http://yoursite.com/return-blog/2020/02/27/"/>
+    <id>http://yoursite.com/return-blog/2020/02/27/</id>
+    <published>2020-02-27T20:57:42.000Z</published>
+    <updated>2020-02-27T22:45:27.376Z</updated>
     
     <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;内心的平静&quot;&gt;&lt;a href=&quot;#内心的平静&quot; class=&quot;headerlink&quot;
+        
+      
     
     </summary>
     
     
+      <category term="life" scheme="http://yoursite.com/categories/life/"/>
+    
+    
+      <category term="thinking" scheme="http://yoursite.com/tags/thinking/"/>
     
   </entry>
   
   <entry>
     <title>[转]我害怕阅读的人</title>
-    <link href="http://yoursite.com/2018/09/09/repo-I-am-afraid-of-people-read-a-a-lot/"/>
-    <id>http://yoursite.com/2018/09/09/repo-I-am-afraid-of-people-read-a-a-lot/</id>
+    <link href="http://yoursite.com/repo-I-am-afraid-of-people-read-a-a-lot/2018/09/09/"/>
+    <id>http://yoursite.com/repo-I-am-afraid-of-people-read-a-a-lot/2018/09/09/</id>
     <published>2018-09-10T01:31:24.000Z</published>
     <updated>2018-09-09T13:54:47.173Z</updated>
     
@@ -63,8 +75,8 @@
   
   <entry>
     <title>《wonder》影评</title>
-    <link href="http://yoursite.com/2018/01/20/wonder-review/"/>
-    <id>http://yoursite.com/2018/01/20/wonder-review/</id>
+    <link href="http://yoursite.com/wonder-review/2018/01/20/"/>
+    <id>http://yoursite.com/wonder-review/2018/01/20/</id>
     <published>2018-01-21T04:55:16.000Z</published>
     <updated>2018-01-20T17:24:04.120Z</updated>
     
@@ -95,8 +107,8 @@
   
   <entry>
     <title>VR介绍，学习笔记</title>
-    <link href="http://yoursite.com/2017/12/26/VR-concept/"/>
-    <id>http://yoursite.com/2017/12/26/VR-concept/</id>
+    <link href="http://yoursite.com/VR-concept/2017/12/26/"/>
+    <id>http://yoursite.com/VR-concept/2017/12/26/</id>
     <published>2017-12-27T02:01:17.000Z</published>
     <updated>2017-12-26T16:01:16.870Z</updated>
     
@@ -122,8 +134,8 @@
   
   <entry>
     <title>Ubuntu搭建使用LightNVM开发Open Channel SSD的QEMU虚拟机</title>
-    <link href="http://yoursite.com/2017/11/06/2017-11-06-nvme-lightnvm/"/>
-    <id>http://yoursite.com/2017/11/06/2017-11-06-nvme-lightnvm/</id>
+    <link href="http://yoursite.com/2017-11-06-nvme-lightnvm/2017/11/06/"/>
+    <id>http://yoursite.com/2017-11-06-nvme-lightnvm/2017/11/06/</id>
     <published>2017-11-07T04:43:08.000Z</published>
     <updated>2017-12-18T10:03:26.025Z</updated>
     
@@ -153,11 +165,11 @@
   </entry>
   
   <entry>
-    <title>test</title>
-    <link href="http://yoursite.com/2017/10/14/2017-10-14-test/"/>
-    <id>http://yoursite.com/2017/10/14/2017-10-14-test/</id>
+    <title>悬崖上的人鱼姬影评</title>
+    <link href="http://yoursite.com/2017-10-14-test/2017/10/14/"/>
+    <id>http://yoursite.com/2017-10-14-test/2017/10/14/</id>
     <published>2017-10-15T03:40:05.000Z</published>
-    <updated>2017-12-18T09:10:15.063Z</updated>
+    <updated>2020-02-27T21:01:09.142Z</updated>
     
     <summary type="html">
     
@@ -166,7 +178,7 @@
         
         
           &lt;ul&gt;
-&lt;li&gt;我们今天要测试了。下面是可爱的波妞～&lt;br&gt;&lt;img src=&quot;/2017/10/14/2017-10-14-test/1.jpg&quot;
+&lt;li&gt;悬崖上的人鱼姬～&lt;br&gt;&lt;img src=&quot;/2017-10-14-test/2017/10/14/1.jpg&quot;
         
       
     
@@ -178,8 +190,8 @@
   
   <entry>
     <title>为什么我要写博客</title>
-    <link href="http://yoursite.com/2017/08/03/2017-08-03-why-i-build-blog/"/>
-    <id>http://yoursite.com/2017/08/03/2017-08-03-why-i-build-blog/</id>
+    <link href="http://yoursite.com/2017-08-03-why-i-build-blog/2017/08/03/"/>
+    <id>http://yoursite.com/2017-08-03-why-i-build-blog/2017/08/03/</id>
     <published>2017-08-04T00:41:45.000Z</published>
     <updated>2017-08-03T12:50:50.000Z</updated>
     
@@ -205,8 +217,8 @@
   
   <entry>
     <title>读《当我谈跑步时我谈些什么》</title>
-    <link href="http://yoursite.com/2017/04/27/17-04-27/"/>
-    <id>http://yoursite.com/2017/04/27/17-04-27/</id>
+    <link href="http://yoursite.com/17-04-27/2017/04/27/"/>
+    <id>http://yoursite.com/17-04-27/2017/04/27/</id>
     <published>2017-04-27T05:36:19.000Z</published>
     <updated>2017-08-01T17:16:51.000Z</updated>
     
@@ -235,8 +247,8 @@
   
   <entry>
     <title>思政课随笔——为什么要读书</title>
-    <link href="http://yoursite.com/2016/11/30/16-11-30/"/>
-    <id>http://yoursite.com/2016/11/30/16-11-30/</id>
+    <link href="http://yoursite.com/16-11-30/2016/11/30/"/>
+    <id>http://yoursite.com/16-11-30/2016/11/30/</id>
     <published>2016-12-01T04:59:34.000Z</published>
     <updated>2017-12-12T15:50:22.000Z</updated>
     
@@ -269,8 +281,8 @@
   
   <entry>
     <title>人决定命运还是被命运决定</title>
-    <link href="http://yoursite.com/2016/11/30/11-30-16/"/>
-    <id>http://yoursite.com/2016/11/30/11-30-16/</id>
+    <link href="http://yoursite.com/11-30-16/2016/11/30/"/>
+    <id>http://yoursite.com/11-30-16/2016/11/30/</id>
     <published>2016-11-30T16:12:36.000Z</published>
     <updated>2017-08-01T05:06:56.000Z</updated>
     
@@ -301,8 +313,8 @@
   
   <entry>
     <title>《Making love out of nothing at all》 </title>
-    <link href="http://yoursite.com/2016/09/16/16-09-16/"/>
-    <id>http://yoursite.com/2016/09/16/16-09-16/</id>
+    <link href="http://yoursite.com/16-09-16/2016/09/16/"/>
+    <id>http://yoursite.com/16-09-16/2016/09/16/</id>
     <published>2016-09-16T19:15:24.000Z</published>
     <updated>2017-08-01T05:17:17.000Z</updated>
     
@@ -329,8 +341,8 @@
   
   <entry>
     <title>人不能因为害怕失去，就不去拥有了</title>
-    <link href="http://yoursite.com/2015/08/18/15-08-18/"/>
-    <id>http://yoursite.com/2015/08/18/15-08-18/</id>
+    <link href="http://yoursite.com/15-08-18/2015/08/18/"/>
+    <id>http://yoursite.com/15-08-18/2015/08/18/</id>
     <published>2015-08-19T02:51:59.000Z</published>
     <updated>2017-08-01T05:23:57.000Z</updated>
     
@@ -358,8 +370,8 @@
   
   <entry>
     <title>观仲夏夜之梦有感</title>
-    <link href="http://yoursite.com/2014/06/21/14-06-21/"/>
-    <id>http://yoursite.com/2014/06/21/14-06-21/</id>
+    <link href="http://yoursite.com/14-06-21/2014/06/21/"/>
+    <id>http://yoursite.com/14-06-21/2014/06/21/</id>
     <published>2014-06-21T15:28:20.000Z</published>
     <updated>2017-08-01T05:28:39.000Z</updated>
     
