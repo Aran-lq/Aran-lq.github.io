@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Aaron-lq&#39;s website</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-04-24T03:05:10.909Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Aaron-lq</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hi test</title>
+    <link href="http://yoursite.com/2019/04/24/hi-test/"/>
+    <id>http://yoursite.com/2019/04/24/hi-test/</id>
+    <published>2019-04-24T15:05:10.000Z</published>
+    <updated>2019-04-24T03:05:10.909Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>[转]我害怕阅读的人</title>
+    <link href="http://yoursite.com/2018/09/09/repo-I-am-afraid-of-people-read-a-a-lot/"/>
+    <id>http://yoursite.com/2018/09/09/repo-I-am-afraid-of-people-read-a-a-lot/</id>
+    <published>2018-09-10T01:31:24.000Z</published>
+    <updated>2018-09-09T13:54:47.173Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;最开始是在B站UP主&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="study" scheme="http://yoursite.com/categories/study/"/>
+    
+    
+      <category term="阅读" scheme="http://yoursite.com/tags/%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="成长" scheme="http://yoursite.com/tags/%E6%88%90%E9%95%BF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《wonder》影评</title>
+    <link href="http://yoursite.com/2018/01/20/wonder-review/"/>
+    <id>http://yoursite.com/2018/01/20/wonder-review/</id>
+    <published>2018-01-21T04:55:16.000Z</published>
+    <updated>2018-01-20T17:24:04.120Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;每个人都是不一同的，每个人都值得大家为他（她）至少鼓掌一次。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;一个充满温情，爱与成长的故事。很高兴这个周末选择了这部电影，和蕾
+        
+      
+    
+    </summary>
+    
+    
+      <category term="life" scheme="http://yoursite.com/categories/life/"/>
+    
+    
+      <category term="mood" scheme="http://yoursite.com/tags/mood/"/>
+    
+      <category term="movie_review" scheme="http://yoursite.com/tags/movie-review/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VR介绍，学习笔记</title>
+    <link href="http://yoursite.com/2017/12/26/VR-concept/"/>
+    <id>http://yoursite.com/2017/12/26/VR-concept/</id>
+    <published>2017-12-27T02:01:17.000Z</published>
+    <updated>2017-12-26T16:01:16.870Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="study" scheme="http://yoursite.com/categories/study/"/>
+    
+    
+      <category term="VR" scheme="http://yoursite.com/tags/VR/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu搭建使用LightNVM开发Open Channel SSD的QEMU虚拟机</title>
+    <link href="http://yoursite.com/2017/11/06/2017-11-06-nvme-lightnvm/"/>
+    <id>http://yoursite.com/2017/11/06/2017-11-06-nvme-lightnvm/</id>
+    <published>2017-11-07T04:43:08.000Z</published>
+    <updated>2017-12-18T10:03:26.025Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;参考官网和一些博客，自己梳理了一下整个流程。一定要注意虚拟机跑qemu一般是不支持kvm的，非常非常慢…&lt;/p&gt;
+&lt;h2 id=&quot;在nvme-qemu上配置Lightnvm&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="study" scheme="http://yoursite.com/categories/study/"/>
+    
+    
+      <category term="Open channel SSD" scheme="http://yoursite.com/tags/Open-channel-SSD/"/>
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="LightNVM" scheme="http://yoursite.com/tags/LightNVM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>test</title>
+    <link href="http://yoursite.com/2017/10/14/2017-10-14-test/"/>
+    <id>http://yoursite.com/2017/10/14/2017-10-14-test/</id>
+    <published>2017-10-15T03:40:05.000Z</published>
+    <updated>2017-12-18T09:10:15.063Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;我们今天要测试了。下面是可爱的波妞～&lt;br&gt;&lt;img src=&quot;/2017/10/14/2017-10-14-test/1.jpg&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>为什么我要写博客</title>
+    <link href="http://yoursite.com/2017/08/03/2017-08-03-why-i-build-blog/"/>
+    <id>http://yoursite.com/2017/08/03/2017-08-03-why-i-build-blog/</id>
+    <published>2017-08-04T00:41:45.000Z</published>
+    <updated>2017-08-03T12:50:50.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="life" scheme="http://yoursite.com/categories/life/"/>
+    
+    
+      <category term="thinking" scheme="http://yoursite.com/tags/thinking/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>读《当我谈跑步时我谈些什么》</title>
+    <link href="http://yoursite.com/2017/04/27/17-04-27/"/>
+    <id>http://yoursite.com/2017/04/27/17-04-27/</id>
+    <published>2017-04-27T05:36:19.000Z</published>
+    <updated>2017-08-01T17:16:51.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;&lt;p&gt;前言：&lt;br&gt;本是一次课堂上的阅读作业，却又成了自己与跑步这个多年挚友的对话，一些感悟和碎碎念。
+        
+      
+    
+    </summary>
+    
+    
+      <category term="life" scheme="http://yoursite.com/categories/life/"/>
+    
+    
+      <category term="mood" scheme="http://yoursite.com/tags/mood/"/>
+    
+      <category term="read" scheme="http://yoursite.com/tags/read/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>思政课随笔——为什么要读书</title>
+    <link href="http://yoursite.com/2016/11/30/16-11-30/"/>
+    <id>http://yoursite.com/2016/11/30/16-11-30/</id>
+    <published>2016-12-01T04:59:34.000Z</published>
+    <updated>2017-12-12T15:50:22.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;前言&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;思政课小组讨论后的思考，现在看着是有点儿矫情的。。。权当自己碎碎念式的感谢，感谢那些无私分享自己思想的写书人。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;正文&lt;/l
+        
+      
+    
+    </summary>
+    
+    
+      <category term="life" scheme="http://yoursite.com/categories/life/"/>
+    
+    
+      <category term="mood" scheme="http://yoursite.com/tags/mood/"/>
+    
+      <category term="thinking" scheme="http://yoursite.com/tags/thinking/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>人决定命运还是被命运决定</title>
+    <link href="http://yoursite.com/2016/11/30/11-30-16/"/>
+    <id>http://yoursite.com/2016/11/30/11-30-16/</id>
+    <published>2016-11-30T16:12:36.000Z</published>
+    <updated>2017-08-01T05:06:56.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;种一棵树最好的时间是十年前，而后是现在&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;自从自己经历了两年的波折弯路后，这句话一直被自己放在心里，难过和气馁时给我安慰。有时自
+        
+      
+    
+    </summary>
+    
+    
+      <category term="life" scheme="http://yoursite.com/categories/life/"/>
+    
+    
+      <category term="mood" scheme="http://yoursite.com/tags/mood/"/>
+    
+      <category term="thinking" scheme="http://yoursite.com/tags/thinking/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《Making love out of nothing at all》 </title>
+    <link href="http://yoursite.com/2016/09/16/16-09-16/"/>
+    <id>http://yoursite.com/2016/09/16/16-09-16/</id>
+    <published>2016-09-16T19:15:24.000Z</published>
+    <updated>2017-08-01T05:17:17.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;毕业两年，又回到学校，如做梦一般，倍加感恩。失去了好多好多，付出了好多好多，回首细念，诚惶诚恐，那些珍视的东西都完全不可控地在我身边疯狂地逝去。&lt;/p&gt;
+&lt;p&gt;再次走到校园，我充满感恩地呼吸着每
+        
+      
+    
+    </summary>
+    
+    
+      <category term="life" scheme="http://yoursite.com/categories/life/"/>
+    
+    
+      <category term="mood" scheme="http://yoursite.com/tags/mood/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>人不能因为害怕失去，就不去拥有了</title>
+    <link href="http://yoursite.com/2015/08/18/15-08-18/"/>
+    <id>http://yoursite.com/2015/08/18/15-08-18/</id>
+    <published>2015-08-19T02:51:59.000Z</published>
+    <updated>2017-08-01T05:23:57.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;《滚蛋吧，肿瘤君！》&lt;/p&gt;
+&lt;p&gt;这个感动过我的漫画，这个真人真事儿，被拍成电影后，让我哭成泪人。第一次在电影院哭成这样，越成长越能体会生活的不易和保持乐观积极的不易。&lt;/p&gt;
+&lt;p&gt;晚安，熊
+        
+      
+    
+    </summary>
+    
+    
+      <category term="life" scheme="http://yoursite.com/categories/life/"/>
+    
+    
+      <category term="mood" scheme="http://yoursite.com/tags/mood/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>观仲夏夜之梦有感</title>
+    <link href="http://yoursite.com/2014/06/21/14-06-21/"/>
+    <id>http://yoursite.com/2014/06/21/14-06-21/</id>
+    <published>2014-06-21T15:28:20.000Z</published>
+    <updated>2017-08-01T05:28:39.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;一段美妙的音乐，大多数都是由各种乐器共同创造的，音色不同，但彼此相通，互相支持。就算是独奏乐往往也是通过和声来增强表现力，旋律音和和声音交错烘托，让对方得到升华。&lt;/p&gt;
+&lt;p&gt;弦乐组，钢琴，鼓
+        
+      
+    
+    </summary>
+    
+    
+      <category term="life" scheme="http://yoursite.com/categories/life/"/>
+    
+    
+      <category term="mood" scheme="http://yoursite.com/tags/mood/"/>
+    
+  </entry>
+  
+</feed>
